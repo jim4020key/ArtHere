@@ -113,6 +113,11 @@ class ExploreViewController: UIViewController {
         collectionView.isHidden = !viewModel.isCarouselMode
         tableView.isHidden = viewModel.isCarouselMode
         pageControl.isHidden = !viewModel.isCarouselMode
+        
+        let buttonImage = viewModel.isCarouselMode ?
+        UIImage(systemName: "rectangle.stack") :
+        UIImage(systemName: "list.bullet.rectangle.fill")
+        toggleButton.setImage(buttonImage, for: .normal)
     }
     
     @objc private func pageControlValueChanged(_ sender: UIPageControl) {
