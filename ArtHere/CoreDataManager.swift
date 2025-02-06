@@ -61,6 +61,22 @@ class CoreDataManager {
         }
     }
     
+    func fetchFavorites() -> [FavoriteMuseum] {
+        let context = persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<FavoriteMuseum> = FavoriteMuseum.fetchRequest()
+        
+        let sortDescriptor = NSSortDescriptor(key: "lastUpdated", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        do {
+            let museums = try context.fetch(fetchRequest)
+            return museums
+        } catch {
+            print("Failed to fetch favorites: \(error)")
+            return []
+        }
+    }
+    
     private func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {

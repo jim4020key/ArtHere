@@ -32,6 +32,9 @@ final class TabBarViewController: UITabBarController {
         )
         favoritesTabBarItem.selectedImage = UIImage(systemName: "heart.circle.fill")
         favoritesViewController.tabBarItem = favoritesTabBarItem
+        favoritesViewController.setOnFavoriteRemoved { [weak exploreViewController] _ in
+            exploreViewController?.reloadCollectionView()
+        }
         
         let exploreNavController = UINavigationController(rootViewController: exploreViewController)
         let favoritesNavController = UINavigationController(rootViewController: favoritesViewController)

@@ -108,6 +108,10 @@ class ExploreViewController: UIViewController {
         pageControl.numberOfPages = viewModel.museums.count
     }
     
+    func reloadCollectionView() {
+        collectionView.reloadData()
+    }
+    
     @objc private func toggleButtonTapped() {
         viewModel.toggleViewMode()
         collectionView.isHidden = !viewModel.isCarouselMode
