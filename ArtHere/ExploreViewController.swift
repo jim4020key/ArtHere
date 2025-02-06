@@ -136,7 +136,9 @@ extension ExploreViewController: UICollectionViewDataSource, UICollectionViewDel
             return UICollectionViewCell()
         }
         
-        cell.configure(with: viewModel.museums[indexPath.item])
+        let museum = viewModel.museums[indexPath.item]
+        cell.configure(with: museum, viewModel: viewModel)
+        
         return cell
     }
     

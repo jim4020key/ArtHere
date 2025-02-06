@@ -10,6 +10,9 @@ import UIKit
 class MuseumCell: UICollectionViewCell {
     static let identifier = "MuseumCell"
     
+    private var museum: Museum?
+    private var viewModel: ExploreViewModel?
+    
     private let containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .primary
@@ -35,7 +38,6 @@ class MuseumCell: UICollectionViewCell {
     private let favoriteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "heart"), for: .normal)
-        button.tintColor = .white
         return button
     }()
     
@@ -93,8 +95,31 @@ class MuseumCell: UICollectionViewCell {
         ])
     }
     
-    func configure(with museum: Museum) {
+    func configure(with museum: Museum, viewModel: ExploreViewModel) {
+        self.museum = museum
+        self.viewModel = viewModel
+        
         nameLabel.text = museum.name
         imageView.image = UIImage(named: museum.pageURL)
+        updateFavoriteButton()
+        
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
+    }
+    
+    private func updateFavoriteButton() {
+        guard let museum = museum,
+              let viewModel = viewModel else { return }
+        
+        let isFavorite = viewModel.isFavorite(museumName: museum.name)
+        favoriteButton.setImage(isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart"), for: .normal)
+        favoriteButton.tintColor = isFavorite ? .accent : .white
+    }
+    
+    @objc private func favoriteButtonTapped() {
+        guard let museum = museum,
+              let viewModel = viewModel else { return }
+        
+        viewModel.toggleFavorite(for: museum.name)
+        updateFavoriteButton()
     }
 }
