@@ -8,6 +8,26 @@
 import UIKit
 
 final class TabBarViewController: UITabBarController {
+    static let defaultAppearance: UINavigationBarAppearance = {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .base
+        return appearance
+    }()
+    
+    static let scrollViewNavigationBarAppearance: UINavigationBarAppearance = {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white
+        return appearance
+    }()
+    
+    static let scrollViewTabBarAppearance: UITabBarAppearance = {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white
+        return appearance
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()

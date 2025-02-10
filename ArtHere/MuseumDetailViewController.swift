@@ -66,12 +66,19 @@ class MuseumDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupAppearance()
         titleLabel.text = viewModel.museumName
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateFavoriteButton()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.standardAppearance = TabBarViewController.defaultAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = TabBarViewController.defaultAppearance
     }
     
     private func setupUI() {
@@ -119,12 +126,18 @@ class MuseumDetailViewController: UIViewController {
             
             shareButton.topAnchor.constraint(equalTo: whatsOnLabel.bottomAnchor, constant: 100),
             shareButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            shareButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            shareButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])
         
         favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
         homepageButton.addTarget(self, action: #selector(homepageButtonTapped), for: .touchUpInside)
         shareButton.addTarget(self, action: #selector(shareButtonTapped), for: .touchUpInside)
+    }
+    
+    private func setupAppearance() {
+        navigationController?.navigationBar.standardAppearance = TabBarViewController.scrollViewNavigationBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = TabBarViewController.scrollViewNavigationBarAppearance
+        tabBarController?.tabBar.standardAppearance = TabBarViewController.scrollViewTabBarAppearance
     }
     
     private func updateFavoriteButton() {
