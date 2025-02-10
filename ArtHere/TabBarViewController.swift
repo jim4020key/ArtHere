@@ -38,6 +38,8 @@ final class TabBarViewController: UITabBarController {
         
         let exploreNavController = UINavigationController(rootViewController: exploreViewController)
         let favoritesNavController = UINavigationController(rootViewController: favoritesViewController)
+        exploreNavController.navigationBar.tintColor = .primary
+        favoritesNavController.navigationBar.tintColor = .primary
         
         viewControllers = [exploreNavController, favoritesNavController]
         

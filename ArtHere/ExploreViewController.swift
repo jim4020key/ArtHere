@@ -157,9 +157,19 @@ extension ExploreViewController: UICollectionViewDataSource, UICollectionViewDel
         targetContentOffset.pointee = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: 0)
         pageControl.currentPage = Int(roundedIndex)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let museum = viewModel.museums[indexPath.item]
+        let detailViewModel = MuseumDetailViewModel(museum: museum)
+        detailViewModel.onFavoriteToggled = { [weak self] in
+            self?.collectionView.reloadData()
+        }
+        let detailViewController = MuseumDetailViewController(viewModel: detailViewModel)
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }
 
-extension ExploreViewController: UITableViewDataSource {
+extension ExploreViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.museums.count
     }
@@ -181,5 +191,15 @@ extension ExploreViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let museum = viewModel.museums[indexPath.row]
+        let detailViewModel = MuseumDetailViewModel(museum: museum)
+        detailViewModel.onFavoriteToggled = { [weak self] in
+            self?.tableView.reloadData()
+        }
+        let detailViewController = MuseumDetailViewController(viewModel: detailViewModel)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
