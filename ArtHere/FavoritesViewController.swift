@@ -103,7 +103,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
         if let name = museum.name {
             
             //TODO: 이름으로 해당 미술관을 검색 후 전달
-            let museum = Museum(name: name, pageURL: "", address: "", longtitute: 0.0, lattitute: 0.0)
+            let museum = Museum(fcltyNm: name, rdnmadr: "", homepageUrl: "", latitude: "0.0", longitude: "0.0")
             
             let detailViewModel = MuseumDetailViewModel(museum: museum)
             let detailViewController = MuseumDetailViewController(viewModel: detailViewModel)

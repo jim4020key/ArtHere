@@ -31,6 +31,7 @@ class ExploreViewController: UIViewController {
         let table = UITableView(frame: .zero, style: .plain)
         table.backgroundColor = .clear
         table.dataSource = self
+        table.delegate = self
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return table
     }()
@@ -60,7 +61,7 @@ class ExploreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        configurePageControl()
+        setupBindings()
     }
     
     private func setupUI() {
@@ -102,6 +103,24 @@ class ExploreViewController: UIViewController {
         
         tableView.isHidden = true
         toggleButton.addTarget(self, action: #selector(toggleButtonTapped), for: .touchUpInside)
+    }
+    
+    private func setupBindings() {
+        viewModel.onMuseumsUpdated = { [weak self] museums in
+            self?.collectionView.reloadData()
+            self?.tableView.reloadData()
+            self?.configurePageControl()
+        }
+        
+        viewModel.onError = { [weak self] error in
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "알림",
+                                              message: "미술관 정보를 가져오는데 실패했습니다",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                self?.present(alert, animated: true)
+            }
+        }
     }
     
     private func configurePageControl() {

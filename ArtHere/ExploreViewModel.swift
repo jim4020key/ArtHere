@@ -8,13 +8,30 @@
 import UIKit
 
 class ExploreViewModel {
-    @Published var museums: [Museum] = []
     @Published var isCarouselMode = true
-    
     private let coreDataManager = CoreDataManager.shared
+    private let networkManager = NetworkManager.shared
+    
+    var museums: [Museum] = []
+    var onMuseumsUpdated: (([Museum]) -> Void)?
+    var onError: ((Error) -> Void)?
     
     init() {
-        museums = Museum.sampleData
+        fetchMuseums()
+    }
+    
+    func fetchMuseums() {
+        networkManager.fetchMuseums { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let museums):
+                    self?.museums = museums
+                    self?.onMuseumsUpdated?(museums)
+                case .failure(let error):
+                    self?.onError?(error)
+                }
+            }
+        }
     }
     
     func toggleViewMode() {
