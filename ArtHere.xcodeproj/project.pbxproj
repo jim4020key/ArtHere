@@ -33,7 +33,7 @@
 		4D3699D82D4A5DA50026E14C /* Exceptions for "ArtHere" folder in "ArtHere" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Application/Info.plist,
 			);
 			target = 4D3699AC2D4A5DA40026E14C /* ArtHere */;
 		};
