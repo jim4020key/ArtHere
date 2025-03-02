@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4D369A212D70A3C70026E14C /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 4D369A202D70A3C70026E14C /* PostgREST */; };
+		4D369A232D70A3C70026E14C /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 4D369A222D70A3C70026E14C /* Supabase */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		4D3699C72D4A5DA50026E14C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D369A232D70A3C70026E14C /* Supabase in Frameworks */,
+				4D369A212D70A3C70026E14C /* PostgREST in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +132,8 @@
 			);
 			name = ArtHere;
 			packageProductDependencies = (
+				4D369A202D70A3C70026E14C /* PostgREST */,
+				4D369A222D70A3C70026E14C /* Supabase */,
 			);
 			productName = ArtHere;
 			productReference = 4D3699AD2D4A5DA40026E14C /* ArtHere.app */;
@@ -208,6 +217,9 @@
 			);
 			mainGroup = 4D3699A42D4A5DA40026E14C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				4D369A1F2D70A3C70026E14C /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4D3699AE2D4A5DA40026E14C /* Products */;
 			projectDirPath = "";
@@ -567,6 +579,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4D369A1F2D70A3C70026E14C /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase-community/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4D369A202D70A3C70026E14C /* PostgREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D369A1F2D70A3C70026E14C /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = PostgREST;
+		};
+		4D369A222D70A3C70026E14C /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D369A1F2D70A3C70026E14C /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4D3699A52D4A5DA40026E14C /* Project object */;
 }
