@@ -1,0 +1,16 @@
+name: Update Museums Database
+
+on:
+  schedule:
+    - cron: '0 15 * * *'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Edge Function
+        run: |
+          curl -L -X POST 'https://csvjadbjklwitozjocte.supabase.co/functions/v1/update-museums' \
+          -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+          -H 'Content-Type: application/json' \
+          --data '{"name":"Functions"}'
